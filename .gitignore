@@ -1,0 +1,25 @@
+# Maven
+/target/
+
+# IDEs (IntelliJ, Eclipse, VS Code)
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+
+# Archivos de sistema y temporales
+Thumbs.db
+.DS_Store
+*.log
+
+# Carpeta de salida de jpackage (dist)
+/dist/
+
+# Base de datos local si se genera en la carpeta del proyecto
+*.mv.db
+*.trace.db
+
+# Java Heap Dumps (archivos temporales de memoria)
+*.hprof

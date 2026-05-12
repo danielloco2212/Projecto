@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${page.title}">Vista de Página</title>
+</head>
+<body>
+    <header>
+        <h1 th:text="${page.title}"></h1>
+        <hr>
+    </header>
+    <main th:utext="${page.content}"></main>
+    <footer style="margin-top: 50px;"><a href="/list">Volver a la lista</a></footer>
+</body>
+</html>
