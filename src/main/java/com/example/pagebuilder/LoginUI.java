@@ -143,8 +143,8 @@ public class LoginUI extends JFrame {
                 .filter(u -> passwordEncoder.matches(password, u.getPassword())) // Compara la contraseña encriptada
                 .ifPresentOrElse(u -> {
                     swingUI.setCurrentUser(u); // Pasar el usuario a la UI principal
-                    this.dispose(); // Cierra esta ventana
-                    swingUI.loadInitialData(); // Prepara la interfaz principal
+                    this.dispose(); 
+                    swingUI.loadInitialData(); 
                     swingUI.setVisible(true); // Muestra la interfaz principal
                 }, () -> JOptionPane.showMessageDialog(this, "Credenciales incorrectas", "Error", JOptionPane.ERROR_MESSAGE));
     }

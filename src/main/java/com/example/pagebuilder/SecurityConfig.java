@@ -12,7 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    // ✅ Esto es lo que le faltaba — define el bean que usan LoginUI y ApiController
+    // define el bean que usan LoginUI y ApiController
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

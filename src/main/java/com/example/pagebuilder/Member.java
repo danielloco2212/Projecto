@@ -20,7 +20,7 @@ public class Member {
     @JsonIgnore
     private Team team;
 
-    // ✅ Campo extra para recibir el teamId desde Android
+    
     @Transient // No se guarda en BD, solo para recibir el JSON
     private Long teamId;
 }

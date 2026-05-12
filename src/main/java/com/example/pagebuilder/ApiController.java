@@ -52,7 +52,7 @@ public class ApiController {
         }).orElse(ResponseEntity.notFound().build());
     }
 
-    // ✅ AÑADIDO: Eliminar noticia
+    // Eliminar noticia
     @DeleteMapping("/posts/{id}")
     public ResponseEntity<Void> deletePost(@PathVariable Long id) {
         if (!postRepository.existsById(id)) {
@@ -73,7 +73,7 @@ public class ApiController {
         return teamRepository.save(team);
     }
 
-    // ✅ AÑADIDO: Eliminar equipo
+    // Eliminar equipo
     @DeleteMapping("/teams/{id}")
     public ResponseEntity<Void> deleteTeam(@PathVariable Long id) {
         if (!teamRepository.existsById(id)) {
@@ -113,7 +113,7 @@ public class ApiController {
         }).orElse(ResponseEntity.notFound().build());
     }
 
-    // ✅ AÑADIDO: Eliminar miembro
+    // Eliminar miembro
     @DeleteMapping("/members/{id}")
     public ResponseEntity<Void> deleteMember(@PathVariable Long id) {
         if (!memberRepository.existsById(id)) {
@@ -134,7 +134,7 @@ public class ApiController {
         return imageRepository.save(image);
     }
 
-    // ✅ AÑADIDO: Eliminar imagen
+    // Eliminar imagen
     @DeleteMapping("/gallery/{id}")
     public ResponseEntity<Void> deleteImage(@PathVariable Long id) {
         if (!imageRepository.existsById(id)) {

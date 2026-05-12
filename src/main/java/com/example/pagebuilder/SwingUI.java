@@ -115,17 +115,17 @@ public class SwingUI extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1.0;
 
-        // Logo Empresa/Club (Arriba a la izquierda del panel central, top del menú)
+        // Logo Club
         lblSidebarLogo = new JLabel();
         lblSidebarLogo.setHorizontalAlignment(SwingConstants.CENTER);
         lblSidebarLogo.setPreferredSize(new Dimension(220, 120));
         gbc.gridy = 0;
-        gbc.insets = new Insets(0, 0, 30, 0); // Mayor margen inferior para separar el logo de los botones
+        gbc.insets = new Insets(0, 0, 30, 0); 
         navPanel.add(lblSidebarLogo, gbc);
-        loadAppLogo(); // Cargar el logo estático de tu empresa
+        loadAppLogo();
 
-        // Definimos los 3 botones principales que pediste
-        gbc.insets = new Insets(0, 0, 15, 0); // Espacio estándar entre botones
+        // Definimos los 3 botones principales 
+        gbc.insets = new Insets(0, 0, 15, 0); 
         gbc.gridy = 1; navPanel.add(createNavButton("⚙️ CONFIG", "CLUB"), gbc);
         gbc.gridy = 2; navPanel.add(createNavButton("📰 NOTICIAS", "NOTICIAS"), gbc);
         gbc.gridy = 3; navPanel.add(createNavButton("👥 EQUIPOS", "EQUIPOS"), gbc);
