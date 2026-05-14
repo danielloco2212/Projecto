@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mis Páginas</title>
+</head>
+<body>
+    <h1>Páginas Creadas</h1>
+    <ul>
+        <li th:each="p : ${pages}">
+            <a th:href="@{'/view/' + ${p.id}}" th:text="${p.title}"></a>
+        </li>
+    </ul>
+    <div th:if="${#lists.isEmpty(pages)}">
+        <p>No hay páginas creadas aún.</p>
+    </div>
+    <br>
+    <a href="/">Crear nueva página</a>
+</body>
+</html>

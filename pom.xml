@@ -47,48 +47,58 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+        </dependency>
+        <!-- Dependencias necesarias para ejecutar JUnit desde src/main/java -->
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite-engine</artifactId>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
+        <dependency> <!-- Dependencia para el tema FlatLaf, que mejora la apariencia de Swing -->
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
             <version>3.2</version>
         </dependency>
         <!-- Dependencias para Selenium (Pruebas de UI Web) -->
-        <dependency>
+        <dependency> <!-- Biblioteca principal de Selenium para automatización de navegadores -->
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.10.0</version> <!-- Usa una versión estable reciente -->
-            <scope>test</scope>
         </dependency>
-        <dependency>
+        <dependency> <!-- Para gestionar automáticamente los drivers de navegador (ChromeDriver, etc.) -->
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>5.5.3</version> <!-- Para gestionar automáticamente los drivers de navegador -->
-            <scope>test</scope>
         </dependency>
         <!-- Dependencias para Cucumber (Pruebas BDD) -->
         <dependency>
-            <groupId>io.cucumber</groupId>
+            <groupId>io.cucumber</groupId> <!-- Biblioteca principal de Cucumber para BDD -->
             <artifactId>cucumber-java</artifactId>
             <version>7.14.0</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
+            <plugin> <!-- Plugin para generar diagramas PlantUML -->
                 <groupId>com.github.davidmoten</groupId>
                 <artifactId>plantuml-maven-plugin</artifactId>
                 <version>0.1</version>
             </plugin>
-            <plugin>
+            <plugin> <!-- Plugin de Spring Boot para empaquetar la aplicación como un JAR ejecutable -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
@@ -100,7 +110,7 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <plugin>
+            <plugin> <!-- Plugin del compilador de Maven, configurado para Lombok -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>

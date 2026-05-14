@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Creador de Páginas</title>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+      tinymce.init({ selector: 'textarea', plugins: 'image code table lists', toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright | image | code' });
+    </script>
+</head>
+<body>
+    <h1>Crear nueva página</h1>
+    <form th:action="@{/save}" th:object="${page}" method="post">
+        <div>
+            <label>Título:</label>
+            <input type="text" th:field="*{title}" required />
+        </div>
+        <br>
+        <div>
+            <textarea th:field="*{content}" style="height: 400px;"></textarea>
+        </div>
+        <button type="submit">Guardar Página</button>
+    </form>
+    <p><a href="/list">Ver todas las páginas</a></p>
+</body>
+</html>

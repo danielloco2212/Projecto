@@ -12,7 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    // define el bean que usan LoginUI y ApiController
+    // Define el bean que usan InterfazAcceso y ControladorApi
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -22,9 +22,9 @@ public class SecurityConfig {
 public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
         .csrf(csrf -> csrf.disable())
-        .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/api/**").permitAll()  // API móvil
-            .requestMatchers("/", "/**").permitAll() // ✅ Página web pública
+        .authorizeHttpRequests(auth -> auth // Configura las reglas de autorización para las solicitudes HTTP
+            .requestMatchers("/api/**").permitAll()  
+            .requestMatchers("/", "/**").permitAll() 
             .anyRequest().authenticated()
         );
     return http.build();

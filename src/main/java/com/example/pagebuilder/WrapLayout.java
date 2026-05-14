@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 /**
- * FlowLayout subclass that fully supports wrapping of components.
+ * Subclase de FlowLayout que soporta completamente el ajuste de línea de componentes.
  */
 public class WrapLayout extends FlowLayout {
     public WrapLayout() {
@@ -21,17 +21,17 @@ public class WrapLayout extends FlowLayout {
 
     @Override
     public Dimension preferredLayoutSize(Container target) {
-        return layoutSize(target, true);
+        return calcularTamanoDisposicion(target, true); // Calcula el tamaño preferido de la disposición
     }
 
     @Override
     public Dimension minimumLayoutSize(Container target) {
-        Dimension minimum = layoutSize(target, false);
-        minimum.width -= (getHgap() + 1);
-        return minimum;
+        Dimension minimo = calcularTamanoDisposicion(target, false); // Calcula el tamaño mínimo de la disposición
+        minimo.width -= (getHgap() + 1); // Ajusta el ancho mínimo
+        return minimo;
     }
 
-    private Dimension layoutSize(Container target, boolean preferred) {
+    private Dimension calcularTamanoDisposicion(Container target, boolean preferido) { // Renombrado
         synchronized (target.getTreeLock()) {
             int targetWidth = target.getSize().width;
 
@@ -44,56 +44,55 @@ public class WrapLayout extends FlowLayout {
             int horizontalInsetsAndGap = insets.left + insets.right + (hgap * 2);
             int maxWidth = targetWidth - horizontalInsetsAndGap;
 
-            Dimension dim = new Dimension(0, 0);
-            int rowWidth = 0;
-            int rowHeight = 0;
+            Dimension dimension = new Dimension(0, 0); 
+            int anchoFila = 0; 
+            int altoFila = 0; 
 
-            int nmembers = target.getComponentCount();
+            int numMiembros = target.getComponentCount(); // Número de componentes
 
-            for (int i = 0; i < nmembers; i++) {
-                Component m = target.getComponent(i);
+            for (int i = 0; i < numMiembros; i++) {
+                Component componente = target.getComponent(i); // Componente actual
 
-                if (m.isVisible()) {
-                    Dimension d = preferred ? m.getPreferredSize() : m.getMinimumSize();
+                if (componente.isVisible()) {
+                    Dimension d = preferido ? componente.getPreferredSize() : componente.getMinimumSize(); // Obtiene el tamaño preferido o mínimo
 
-                    if (rowWidth + d.width > maxWidth) {
-                        addRow(dim, rowWidth, rowHeight);
-                        rowWidth = 0;
-                        rowHeight = 0;
+                    if (anchoFila + d.width > maxWidth) { // Si el componente no cabe en la fila actual
+                        agregarFila(dimension, anchoFila, altoFila); // Añade la fila actual a la dimensión total
+                        anchoFila = 0; // Reinicia el ancho de la fila
+                        altoFila = 0; // Reinicia el alto de la fila
                     }
 
-                    if (rowWidth > 0) {
-                        rowWidth += hgap;
+                    if (anchoFila > 0) { // Si no es el primer componente de la fila, añade el espacio horizontal
+                        anchoFila += hgap;
                     }
 
-                    rowWidth += d.width;
-                    rowHeight = Math.max(rowHeight, d.height);
+                    anchoFila += d.width; // Añade el ancho del componente al ancho de la fila
+                    altoFila = Math.max(altoFila, d.height); // Actualiza el alto máximo de la fila
                 }
             }
 
-            addRow(dim, rowWidth, rowHeight);
+            agregarFila(dimension, anchoFila, altoFila); 
 
-            dim.width += horizontalInsetsAndGap;
-            dim.height += insets.top + insets.bottom + vgap * 2;
+            dimension.width += horizontalInsetsAndGap; // Añade los insets y el espacio horizontal
+            dimension.height += insets.top + insets.bottom + vgap * 2; // Añade los insets y el espacio vertical
 
-            // When used in a JScrollPane, the width is slightly reduced to avoid
-            // the horizontal scroll bar appearing unnecessarily.
+            
             Container scrollPane = SwingUtilities.getAncestorOfClass(JScrollPane.class, target);
             if (scrollPane != null && target.isValid()) {
-                dim.width -= (hgap + 1);
+                dimension.width -= (hgap + 1); // Reduce el ancho para evitar la barra de desplazamiento horizontal
             }
 
-            return dim;
+            return dimension;
         }
     }
 
-    private void addRow(Dimension dim, int rowWidth, int rowHeight) {
-        dim.width = Math.max(dim.width, rowWidth);
+    private void agregarFila(Dimension dimension, int anchoFila, int altoFila) { 
+        dimension.width = Math.max(dimension.width, anchoFila); // Actualiza el ancho máximo de la disposición
 
-        if (dim.height > 0) {
-            dim.height += getVgap();
+        if (dimension.height > 0) { // Si no es la primera fila, añade el espacio vertical
+            dimension.height += getVgap();
         }
 
-        dim.height += rowHeight;
+        dimension.height += altoFila; // Añade el alto de la fila a la altura total
     }
 }
